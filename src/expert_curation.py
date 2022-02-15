@@ -35,4 +35,4 @@ curated_twitter_follows = list(set.intersection(*list_of_follows_of_trusted_acco
 curated_twitter_follows_handle = [TWITTER.get_user(user_id=u_id).__dict__["data"].__dict__["username"] for u_id in curated_twitter_follows]
 
 DISCORD.send(f"Hey DAS, based on handles: {handle_of_trusted_accounts}, you should follow {curated_twitter_follows_handle[0: (len(curated_twitter_follows_handle)/2)]}.")
-DISCORD.send(f"and : {curated_twitter_follows_handle[len(curated_twitter_follows_handle)/2:]}, you should follow {curated_twitter_follows_handle[0: len(curated_twitter_follows_handle)/2]}.")
+DISCORD.send(f"and : {curated_twitter_follows_handle[len(curated_twitter_follows_handle)/2:]}.")
