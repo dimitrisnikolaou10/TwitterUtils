@@ -35,7 +35,7 @@ for id_ in nft_collections_ids:
         next_token = follows_full_data["meta"].__dict__["next_token"]
         followers += follows_full_data["data"]
         total_follows += 1000
-        now = datetime.now()
+        now = datetime.datetime.now()
         current_time = now.strftime("%H:%M:%S")
         print(f"ID: {id_} is followed by {total_follows} users. Current time is: {current_time}")
         time.sleep(60 * 15)  # necessary limit for querying twitter API
