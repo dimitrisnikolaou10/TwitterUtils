@@ -5,8 +5,7 @@ import datetime
 """
 Add the handle of NFT Collections. The script will return how many followers it has for level 1,2 & 3.
 """
-
-nft_collections_handle = ["RagnarokMeta"]
+nft_collections_handle = ["AzukiZen"]
 nft_collections_ids = handles_to_ids(nft_collections_handle)
 
 LEVEL_1_ID = "1493246044662112258"

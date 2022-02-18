@@ -1,4 +1,4 @@
-from utils import handles_to_ids, TWITTER, DISCORD
+from utils import handles_to_ids, TWITTER, DISCORD, TWITTER_URL
 import time
 import datetime
 
@@ -33,6 +33,9 @@ for id_ in id_of_trusted_accounts:
 
 curated_twitter_follows = list(set.intersection(*list_of_follows_of_trusted_accounts))
 curated_twitter_follows_handle = [TWITTER.get_user(user_id=u_id).__dict__["data"].__dict__["username"] for u_id in curated_twitter_follows]
+curated_twitter_follows_twitter_url = [TWITTER_URL + handle for handle in curated_twitter_follows_handle]
 
-DISCORD.send(f"Hey DAS, based on handles: {handle_of_trusted_accounts}, you should follow {curated_twitter_follows_handle[0: (len(curated_twitter_follows_handle)/2)]}.")
-DISCORD.send(f"and : {curated_twitter_follows_handle[len(curated_twitter_follows_handle)/2:]}.")
+DISCORD.send("Expert users to follow:")
+for handle in curated_twitter_follows_twitter_url:
+    DISCORD.send(handle)
+
