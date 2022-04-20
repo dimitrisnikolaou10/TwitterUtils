@@ -6,7 +6,6 @@ import datetime
 Create a set of the last 5 follows of each of Level 1 user, remove users you already follow and return the rest .
 This is based on the fact that Twitter API returns list of following, sorted in the order you followed.
 """
-
 LEVEL_1_ID = "1493246044662112258"
 
 LEVEL_1_USER_IDS = [user.__dict__["id"] for user in TWITTER.get_list_members(list_id=LEVEL_1_ID).__dict__["data"]]

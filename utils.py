@@ -8,8 +8,8 @@ import dotenv
 
 dotenv.load_dotenv()
 
-WEBHOOK_URL = os.getenv('WEBHOOK_URL')
-DISCORD = discord.Webhook.from_url(WEBHOOK_URL, adapter=discord.RequestsWebhookAdapter())
+DISCORD_WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL')
+DISCORD = discord.Webhook.from_url(DISCORD_WEBHOOK_URL, adapter=discord.RequestsWebhookAdapter())
 TWITTER_TOKEN = os.getenv('TWITTER_TOKEN')
 TWITTER = Api(bearer_token=TWITTER_TOKEN)
 TWITTER_URL = "https://twitter.com/"
