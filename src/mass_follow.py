@@ -18,7 +18,7 @@ auth = OAuth1(
         resource_owner_secret=TWITTER_OAUTH_TOKEN_SECRET
 )
 
-handle_of_base_accounts = ["garyveesrc"]
+handle_of_base_accounts = ["TheGivingBlock"]
 id_of_trusted_accounts = handles_to_ids(handles=handle_of_base_accounts)
 next_token = "initial"
 repeat = 0
