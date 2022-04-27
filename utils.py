@@ -7,7 +7,7 @@ from pytwitter import Api
 import dotenv
 
 dotenv.load_dotenv()
-TWITTER_USER = 'dimireadsthings'
+TWITTER_USER = 'hip_munks'
 
 DISCORD_WEBHOOK_URL = os.getenv('DAS_DISCORD_WEBHOOK_URL')
 DISCORD = discord.Webhook.from_url(DISCORD_WEBHOOK_URL, adapter=discord.RequestsWebhookAdapter())
@@ -24,4 +24,4 @@ def handles_to_ids(handles: list):
     id_of_trusted_accounts = [TWITTER.get_users(usernames=handles).__dict__["data"][i].__dict__["id"] for i in range(len(handles))]
     return id_of_trusted_accounts
 
-DASFORNFT_ID = handles_to_ids(["dasdotnft",])[0]
+# dimireadsthingsid = handles_to_ids(["dimireadsthings",])[0]
