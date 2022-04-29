@@ -18,11 +18,12 @@ auth = OAuth1(
         resource_owner_secret=TWITTER_OAUTH_TOKEN_SECRET
 )
 
-handle_of_base_accounts = ["TheGivingBlock"]
+handle_of_base_accounts = ["hip_munks"]
 id_of_trusted_accounts = handles_to_ids(handles=handle_of_base_accounts)
 next_token = "initial"
-repeat = 0
-while repeat < 10:
+followers = []
+thousand_followers_counter = 0
+while thousand_followers_counter < 1:
     if next_token == "initial":
         follows_full_data = TWITTER.get_followers(user_id=id_of_trusted_accounts[0], max_results=1000).__dict__
     else:
@@ -30,17 +31,32 @@ while repeat < 10:
     follows_users = follows_full_data["data"]
     next_token = follows_full_data["meta"].__dict__["next_token"]
     follows = [follows_users[i].__dict__["id"] for i in range(len(follows_users))]
-    print(f"We are in repeat {repeat}, and there's {len(follows)} users to follow.")
-    if repeat > 2:
-        for friend in follows:
+    followers += follows
+    thousand_followers_counter += 1
 
-            params = {
-                'user_id': friend,
-                'follow': 'true',
-            }
+next_token = "initial"
+thousand_followers_counter = 0
+friends = []
+while thousand_followers_counter < 1:
+    if next_token == "initial":
+        follows_full_data = TWITTER.get_following(user_id=id_of_trusted_accounts[0], max_results=1000).__dict__
+    else:
+        follows_full_data = TWITTER.get_following(user_id=id_of_trusted_accounts[0], max_results=1000, pagination_token=next_token).__dict__
+    follows_users = follows_full_data["data"]
+    next_token = follows_full_data["meta"].__dict__["next_token"]
+    follows = [follows_users[i].__dict__["id"] for i in range(len(follows_users))]
+    friends += follows
+    thousand_followers_counter += 1
 
-            response = requests.post('https://api.twitter.com/1.1/friendships/create.json', params=params, auth=auth)
-            print(response)
-            print(friend)
-    repeat += 1
+for f in friends:
+    if f not in followers:
+
+        params = {
+            'user_id': f,
+            'follow': 'true',
+        }
+
+        response = requests.post('https://api.twitter.com/1.1/friendships/destroy.json', params=params, auth=auth)
+        print(response.json())
+        print(f)
 
