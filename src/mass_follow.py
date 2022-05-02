@@ -18,10 +18,11 @@ auth = OAuth1(
         resource_owner_secret=TWITTER_OAUTH_TOKEN_SECRET
 )
 
-handle_of_base_accounts = ["TheGivingBlock"]
+handle_of_base_accounts = ["DoinGudHQ"]
 id_of_trusted_accounts = handles_to_ids(handles=handle_of_base_accounts)
 next_token = "initial"
 repeat = 0
+follow_count = 0
 while repeat < 10:
     if next_token == "initial":
         follows_full_data = TWITTER.get_followers(user_id=id_of_trusted_accounts[0], max_results=1000).__dict__
@@ -31,7 +32,7 @@ while repeat < 10:
     next_token = follows_full_data["meta"].__dict__["next_token"]
     follows = [follows_users[i].__dict__["id"] for i in range(len(follows_users))]
     print(f"We are in repeat {repeat}, and there's {len(follows)} users to follow.")
-    if repeat > 2:
+    if repeat > 0:
         for friend in follows:
 
             params = {
@@ -40,7 +41,9 @@ while repeat < 10:
             }
 
             response = requests.post('https://api.twitter.com/1.1/friendships/create.json', params=params, auth=auth)
-            print(response)
+            follow_count += 1
+            print(response.json())
             print(friend)
+            time.sleep(60)
     repeat += 1
 
